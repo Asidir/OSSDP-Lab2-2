@@ -37,6 +37,10 @@ class Solution {
         }
         Map<Integer, Integer> cnt = new HashMap<Integer, Integer>();
         for (int i = 0; i <= n - L; ++i) {
+             // 使用位操作更新变量 x，表示当前子串的编码
+            // x << 2 表示将 x 左移两位，以便加入新的字符
+            // bin.get(s.charAt(i + L - 1)) 返回字符对应的二进制编码
+            // & ((1 << (L * 2)) - 1) 用于保留 x 的低位 (L * 2) 位，清除多余的高位
             x = ((x << 2) | bin.get(s.charAt(i + L - 1))) & ((1 << (L * 2)) - 1);
             cnt.put(x, cnt.getOrDefault(x, 0) + 1);
             if (cnt.get(x) == 2) {
